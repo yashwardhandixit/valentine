@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Will You Be My Valentine?</title>
+  <title>My Valentine ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -27,6 +27,7 @@
       text-align: center;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       position: relative;
+      z-index: 2;
     }
 
     h1 {
@@ -74,6 +75,7 @@
       top: -10px;
       font-size: 18px;
       animation: fall linear forwards;
+      z-index: 1;
     }
 
     @keyframes fall {
@@ -90,7 +92,7 @@
       background: rgba(0,0,0,0.7);
       justify-content: center;
       align-items: center;
-      z-index: 100;
+      z-index: 10;
     }
 
     .popup-box {
@@ -120,7 +122,7 @@
 </head>
 <body>
 
-<div class="card">
+<div class="card" id="card">
   <h1>Manya ❤️</h1>
   <p>Will you be my Valentine?</p>
 
@@ -133,7 +135,7 @@
 <!-- Popup -->
 <div class="popup" id="popup">
   <div class="popup-box">
-    <img src="us.jpg" alt="Us together">
+    <img src="us.jpg" alt="Us">
     <h2>I love you, Manya 💘</h2>
     <p>Forever yours,<br>Yash ❤️</p>
   </div>
@@ -145,27 +147,38 @@
 </audio>
 
 <script>
-  const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const card = document.getElementById("card");
   const popup = document.getElementById("popup");
   const music = document.getElementById("music");
 
-  // No button runs away
-  noBtn.addEventListener("mouseenter", moveNo);
-  noBtn.addEventListener("touchstart", moveNo);
-
+  // No button escapes
   function moveNo() {
     const x = Math.random() * 200;
     const y = Math.random() * 40;
     noBtn.style.transform = `translate(${x}px, -${y}px)`;
   }
 
-  // Yes button click
+  noBtn.addEventListener("mouseenter", moveNo);
+  noBtn.addEventListener("touchstart", moveNo);
+
+  // YES CLICK FLOW
   yesBtn.addEventListener("click", () => {
+    // 1. Start music
     music.play().catch(() => {});
+
+    // 2. Change page content
+    card.innerHTML = `
+      <h1>Yayyy 💖</h1>
+      <p>You just made my heart the happiest 😍</p>
+      <p>Something special is coming for you...</p>
+    `;
+
+    // 3. Wait 10 seconds, then popup
     setTimeout(() => {
       popup.style.display = "flex";
-    }, 10000); // ⏱️ 10 second delay
+    }, 10000);
   });
 
   // Falling hearts
