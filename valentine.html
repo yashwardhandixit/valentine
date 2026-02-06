@@ -1,144 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Manya ❤️ Yash</title>
+  <meta charset="UTF-8">
+  <title>Will You Be My Valentine?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
       display: flex;
-      align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #ff5f9e, #ff85b3);
+      align-items: center;
+      font-family: Arial, sans-serif;
       overflow: hidden;
-      padding: 16px;
+      padding: 15px;
     }
 
     .card {
       background: white;
-      padding: 28px 22px;
-      border-radius: 22px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
       width: 100%;
-      max-width: 340px;
-      animation: fadeIn 1s ease;
+      max-width: 360px;
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       position: relative;
-      z-index: 2;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
     }
 
     h1 {
-      color: #ff2f7d;
+      color: #e6005c;
       margin-bottom: 10px;
     }
 
-    h2 {
-      color: #ff4d8d;
-      margin-top: 16px;
-    }
-
     p {
-      color: #444;
-      font-size: 15px;
-      line-height: 1.4;
-      margin: 10px 0;
+      font-size: 18px;
+      color: #333;
     }
 
     .buttons {
+      margin-top: 20px;
       position: relative;
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 18px;
-      height: 52px;
+      height: 80px;
     }
 
     button {
-      padding: 12px 18px;
+      padding: 12px 26px;
       border: none;
       border-radius: 30px;
-      font-size: 15px;
+      font-size: 16px;
       cursor: pointer;
-      transition: transform 0.2s ease;
-      white-space: nowrap;
+      position: absolute;
     }
 
-    .yes {
-      background: #ff2f7d;
+    #yesBtn {
+      background: #ff4d6d;
       color: white;
-      z-index: 2;
+      left: 20px;
+      bottom: 10px;
     }
 
-    .yes:active {
-      transform: scale(0.95);
-    }
-
-    .no {
-      background: #e0e0e0;
+    #noBtn {
+      background: #ddd;
       color: #333;
-      position: relative;
-      z-index: 1;
+      right: 20px;
+      bottom: 10px;
     }
 
     /* Hearts */
     .heart {
       position: fixed;
-      bottom: -10px;
-      font-size: 20px;
-      animation: floatUp 5s linear infinite;
-      opacity: 0.9;
-      pointer-events: none;
+      top: -10px;
+      font-size: 18px;
+      animation: fall linear forwards;
     }
 
-    @keyframes floatUp {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-110vh); opacity: 0; }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
     }
 
     /* Popup */
     .popup {
+      display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.65);
-      display: none;
-      align-items: center;
+      background: rgba(0,0,0,0.7);
       justify-content: center;
-      z-index: 10;
-      padding: 16px;
+      align-items: center;
+      z-index: 100;
     }
 
-    .popup-content {
+    .popup-box {
       background: white;
-      padding: 22px;
+      padding: 20px;
       border-radius: 20px;
       text-align: center;
-      max-width: 340px;
-      width: 100%;
-      animation: popUp 0.7s ease;
+      animation: pop 0.6s ease;
+      max-width: 90%;
     }
 
-    .popup-content img {
-      width: 100%;
-      border-radius: 14px;
-      margin-bottom: 14px;
-    }
-
-    @keyframes popUp {
-      from { transform: scale(0.6); opacity: 0; }
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup-box img {
+      width: 220px;
+      border-radius: 15px;
+      margin-bottom: 15px;
     }
 
     audio {
@@ -146,88 +118,68 @@
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Music -->
-  <audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
-  </audio>
+<div class="card">
+  <h1>Manya ❤️</h1>
+  <p>Will you be my Valentine?</p>
 
-  <div class="card">
-    <h1>Manya 💖</h1>
-
-    <p>
-      Every smile of yours feels like home.<br>
-      Every moment with you is my favorite one.
-    </p>
-
-    <p>
-      I don’t need a special day to love you…<br>
-      but today feels perfect to ask 💫
-    </p>
-
-    <h2>Will you be my Valentine? 🌹</h2>
-
-    <div class="buttons">
-      <button class="yes" onclick="yesClicked()">Yes 💕</button>
-      <button class="no" onmouseover="moveNo()" ontouchstart="moveNo()">No 🙈</button>
-    </div>
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙈</button>
   </div>
+</div>
 
-  <!-- Popup -->
-  <div class="popup" id="popup">
-    <div class="popup-content">
-      <img src="us.jpg" alt="Us ❤️">
-      <h1>I Love You ❤️</h1>
-      <p>
-        Manya, you are my today,<br>
-        my tomorrow, and my always 💫
-      </p>
-      <p>— Yours, Yash</p>
-    </div>
+<!-- Popup -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <img src="us.jpg" alt="Us together">
+    <h2>I love you, Manya 💘</h2>
+    <p>Forever yours,<br>Yash ❤️</p>
   </div>
+</div>
 
-  <script>
-    // Floating hearts
-    setInterval(() => {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerText = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }, 350);
+<!-- Music -->
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-    // No button escape (mobile safe)
-    function moveNo() {
-      const noBtn = document.querySelector('.no');
-      noBtn.style.position = 'absolute';
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const popup = document.getElementById("popup");
+  const music = document.getElementById("music");
 
-      const maxX = 180;
-      const maxY = 100;
+  // No button runs away
+  noBtn.addEventListener("mouseenter", moveNo);
+  noBtn.addEventListener("touchstart", moveNo);
 
-      const x = Math.random() * maxX - maxX / 2;
-      const y = Math.random() * maxY - maxY / 2;
+  function moveNo() {
+    const x = Math.random() * 200;
+    const y = Math.random() * 40;
+    noBtn.style.transform = `translate(${x}px, -${y}px)`;
+  }
 
-      noBtn.style.left = x + 'px';
-      noBtn.style.top = y + 'px';
-    }
+  // Yes button click
+  yesBtn.addEventListener("click", () => {
+    music.play().catch(() => {});
+    setTimeout(() => {
+      popup.style.display = "flex";
+    }, 10000); // ⏱️ 10 second delay
+  });
 
-    // Yes click → 10 sec delay → popup
-    function yesClicked() {
-      document.querySelector('.card').innerHTML = `
-        <h1>She Said YES 💘</h1>
-        <p>Manya, you just made my heart smile forever 😍</p>
-        <p>Happy Valentine’s Day ❤️<br>— Yours, Yash</p>
-      `;
+  // Falling hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
 
-      setTimeout(() => {
-        document.getElementById('popup').style.display = 'flex';
-      }, 10000); // ⏱️ 10 seconds
-    }
-  </script>
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+</script>
 
 </body>
 </html>
