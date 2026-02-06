@@ -25,7 +25,7 @@
       box-shadow: 0 25px 45px rgba(0,0,0,0.25);
       max-width: 340px;
       animation: fadeIn 1.2s ease;
-      z-index: 1;
+      z-index: 2;
     }
 
     @keyframes fadeIn {
@@ -43,10 +43,12 @@
     }
 
     .buttons {
+      position: relative;
       display: flex;
       justify-content: center;
       gap: 18px;
       margin-top: 20px;
+      height: 50px;
     }
 
     button {
@@ -61,20 +63,26 @@
     .yes {
       background: #ff2f7d;
       color: white;
+      z-index: 2;
     }
 
-    .yes:hover { transform: scale(1.15); }
+    .yes:hover {
+      transform: scale(1.15);
+    }
 
     .no {
       background: #e0e0e0;
       position: relative;
+      z-index: 1;
     }
 
+    /* Hearts */
     .heart {
       position: fixed;
       bottom: -10px;
       font-size: 22px;
       animation: floatUp 5s linear infinite;
+      opacity: 0.9;
     }
 
     @keyframes floatUp {
@@ -82,7 +90,7 @@
       to { transform: translateY(-110vh); opacity: 0; }
     }
 
-    /* POPUP */
+    /* Popup */
     .popup {
       position: fixed;
       inset: 0;
@@ -117,13 +125,14 @@
 
 <body>
 
-  <!-- Music -->
+  <!-- Background Music -->
   <audio autoplay loop>
     <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
   </audio>
 
   <div class="card">
     <h1>Manya 💖</h1>
+
     <p>
       Every smile of yours feels like home.<br>
       Every moment with you is my favorite one.
@@ -142,7 +151,7 @@
     </div>
   </div>
 
-  <!-- POPUP WITH PHOTO -->
+  <!-- PHOTO POPUP -->
   <div class="popup" id="popup">
     <div class="popup-content">
       <img src="us.jpg" alt="Us ❤️">
@@ -156,33 +165,43 @@
   </div>
 
   <script>
+    // Floating hearts (background)
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+
+    // No button escape (SAFE positioning)
+    function moveNo() {
+      const noBtn = document.querySelector('.no');
+      noBtn.style.position = 'absolute';
+
+      const x = Math.random() * 220 - 110;
+      const y = Math.random() * 120 - 60;
+
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    // Yes click
     function yesClicked() {
       document.querySelector('.card').innerHTML = `
         <h1>She Said YES 💘</h1>
         <p>Manya, you just made my heart smile forever 😍</p>
         <p>Happy Valentine’s Day ❤️<br>— Yours, Yash</p>
       `;
+
+      // Little romantic delay before popup
       setTimeout(() => {
         document.getElementById('popup').style.display = 'flex';
-      }, 1200);
+      }, 1800); // ⏳ 1.8 seconds
     }
-
-    function moveNo() {
-      const noBtn = document.querySelector('.no');
-      noBtn.style.transform =
-        `translate(${Math.random()*250-125}px, ${Math.random()*250-125}px)`;
-    }
-
-    setInterval(() => {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerText = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }, 300);
   </script>
 
 </body>
 </html>
-
